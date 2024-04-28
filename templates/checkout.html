@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<section class="section-content padding-y bg">
+<div class="container">
+
+
+
+<!-- ============================ COMPONENT 2 ================================= -->
+<div class="row">
+		<main class="col-md-8">
+
+<article class="card mb-4">
+<div class="card-body">
+	<h4 class="card-title mb-4">Review cart</h4>
+	<div class="row">
+		{% for cart_item in cart_items %}
+		<div class="col-md-6">
+			<figure class="itemside  mb-4">
+				<div class="aside"><img src="{{ cart_item.image.url }}" class="border img-sm"></div>
+				<figcaption class="info">
+					<p>{{ cart_item.product.product_name }}</p>
+					<span class="text-muted">{{ cart_item.quantity }}X{{ cart_item.product.price }} = ₹{{ cart_item.total_price }}</span>
+				</figcaption>
+			</figure>
+		</div> <!-- col.// -->
+		{% endfor %}
+	</div> <!-- row.// -->
+</div> <!-- card-body.// -->
+</article> <!-- card.// -->
+
+
+<article class="card mb-4">
+<div class="card-body">
+	<h4 class="card-title mb-4">Contact info</h4>
+	<form action="">
+		<div class="row">
+			<div class="form-group col-sm-6">
+				<label>Frst name</label>
+				<input type="text" value="{{ request.user.first_name }}" class="form-control">
+			</div>
+			<div class="form-group col-sm-6">
+				<label>Last name</label>
+				<input type="text" value="{{ request.user.last_name }}" class="form-control">
+			</div>
+			<div class="form-group col-sm-6">
+				<label>Phone</label>
+				<input type="text" class="form-control" value="{{ request.user.phone_number }}">
+			</div>
+			<div class="form-group col-sm-6">
+				<label>Email</label>
+				<input type="email" class="form-control" value="{{ request.user.email }}">
+			</div>
+		</div> <!-- row.// -->
+	</form>
+</div> <!-- card-body.// -->
+</article> <!-- card.// -->
+
+
+<article class="card mb-4">
+<div class="card-body">
+	<h4 class="card-title mb-4">Delivery info</h4>
+	<form action="">
+
+
+		<div class="row">
+				<div class="form-group col-sm-6">
+					<label>Country*</label>
+					<select name="" class="form-control">
+						<option value="">India</option>
+						<option value="">United States</option>
+					</select>
+				</div>
+				<div class="form-group col-sm-6">
+					<label>State*</label>
+					<input type="text" placeholder="Type here" class="form-control">
+				</div>
+				<div class="form-group col-sm-12">
+					<label>Flat, House no., Building, Company, Apartment</label>
+					<input type="text" placeholder="Type here" class="form-control">
+				</div>
+				<div class="form-group col-sm-12">
+					<label>Area, Street, Sector, Village</label>
+					<input type="text" placeholder="Type Here" class="form-control">
+				</div>
+				<div class="form-group col-sm-6">
+					<label>Town/City</label>
+					<input type="text" placeholder="Type here" class="form-control">
+				</div>
+				<div class="form-group col-sm-6">
+					<label>Pincode</label>
+					<input type="text" placeholder="6 digits [0-9] PIN code" class="form-control">
+				</div>
+		</div> <!-- row.// -->
+	</form>
+</div> <!-- card-body.// -->
+</article> <!-- card.// -->
+
+
+<article class="card mb-4">
+<div class="card-body">
+		<h4 class="card-title mb-4">Payment</h4>
+		<header class="card-header">
+			<img src="{% static './images/misc/payment-paypal.png' %}" class="float-right" height="24">
+			<label class="form-check collapsed" data-toggle="collapse" data-target="#pay_paynet">
+				<input class="form-check-input" name="payment-option" checked type="radio" value="option2">
+				<h6 class="form-check-label">
+					Paypal
+				</h6>
+			</label>
+		</header>
+		<div id="pay_paynet" class="collapse show" data-parent="#accordion_pay">
+		<div class="card-body">
+			<p class="text-center text-muted">Connect your PayPal account and use it to pay your bills. You'll be redirected to PayPal to add your billing information.</p>
+			<p class="text-center">
+				<a href="#"><img src="{% static './images/misc/btn-paypal.png' %}" height="32"></a>
+				<br><br>
+			</p>
+		</div> <!-- card body .// -->
+		</div> <!-- collapse .// -->
+	</div> <!-- card.// -->
+
+</article>
+<!-- accordion end.// -->
+
+		</main> <!-- col.// -->
+		<aside class="col-md-4">
+			<div class="card">
+		<div class="card-body">
+			<dl class="dlist-align">
+			  <dt>Total price:</dt>
+			  <dd class="text-right">₹{{ total_price|floatformat:2 }}</dd>
+			</dl>
+			<dl class="dlist-align">
+			  <dt>Tax:</dt>
+			  <dd class="text-right">₹{{ tax|floatformat:2 }}</dd>
+			</dl>
+			<dl class="dlist-align">
+			  <dt>Total:</dt>
+			  <dd class="text-right text-dark b"><strong>₹{{ grand_total|floatformat:2 }}</strong></dd>
+			</dl>
+			<hr>
+			<p class="text-center mb-3">
+				<img src="{% static './images/misc/payments.png' %}" height="26">
+			</p>
+			<a href="./place-order.html" class="btn btn-primary btn-block"> Place Order </a>
+
+		</div> <!-- card-body.// -->
+		</div> <!-- card.// -->
+		</aside> <!-- col.// -->
+	</div> <!-- row.// -->
+
+<!-- ============================ COMPONENT 2 END//  ================================= -->
+
+
+
+
+</div> <!-- container .//  -->
+</section>
+{% endblock %}
